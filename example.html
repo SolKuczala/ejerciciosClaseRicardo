@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>|Titulo de la pagina</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+</head>
+
+<body>
+    <h1 id='titulo'><strong>Starting with objects and events</strong></h1>
+
+
+    <div>
+        <h4 id='texto'>uno, dos, tres, cuatro</h4>
+    </div>
+
+    <button id='boton' onclick='modifyArray()'>Sumar 20</button>
+
+
+    <script>
+        let arr = [1, 2, 3, 4]
+        function modifyArray() {
+            let newAr = arr.map(x => x + 20)
+            document.getElementById('texto').innerHTML = newAr.join(', ')
+        }
+    </script>
+
+</body>
+
+</html>

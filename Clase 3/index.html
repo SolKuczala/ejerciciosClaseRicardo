@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="estilos/general.css">
+</head>
+
+<body>
+  <header>
+    <h1 id="titulo">Empezando con objetos y eventos</h1>
+  </header>
+
+  <!--
+    Vimos cómo definir eventos "inline", es decir, en la misma línea en la que se define el elemento HTML.
+
+    Algunos eventos muy comunes para empezar:
+
+      - onclick: cuando se hace click con el mouse
+      - onmouseover: cuando el puntero del mouse pasa sobre el elemento (casi igual a onmouseenter*)
+      - onmouseout: cuando el puntero del mouse deja de estar sobre el elemento (casi igual a onmouseleave*)
+        * En clase vemos la diferencia entre un par de eventos y el otro, es mínima.
+      - onfocus: cuando se hace foco en el elemento
+      - onblur: cuando el elemento pierde el foco
+
+    Vimos que los eventos se definen como atributo del elemento de la forma:
+    
+    evento = 'algún código JavaScript'
+
+  -->
+  <div id="miDiv1" class="mi-div">Este es miDiv1</div>
+  <div id="miDiv2" class="mi-div" onmouseover='console.log("mouse sobre div 2");'>Y este es miDiv2 con "mouseover"</div>
+
+  <!--
+    Botón sin clase ni estilos
+
+    (Desclasado y sin estilo, bien de botón).
+  -->
+  <button onclick='clickBoton()'>Botón 1</button>
+
+  <!--
+    El evento "onclick" de los 3 botones apunta a la misma función: "clickBoton". Eso significa que
+    no importa qué botón presione, siempre se va a llamar la misma función. En clase vamos a llevar
+    eso a un uso más interesante.
+  -->
+
+  <!--
+    Botón con dos clases: "boton" y "boton-principal".
+    A fines de estilado, esto me permite aplicar el estilo general de mis elementos clase "boton" y
+    además aplicar estilos específicos de "boton-principal"
+  -->
+  <button class='boton boton-principal' onclick='clickBoton()'>Botón 1</button>
+
+  <!-- Botón con clase "boton" solamente, con id "boton2" (los otros botones no tenían id)
+       y con funciones asociadas a los eventos "onmouseover" y "onmouseout"
+  -->
+  <button id="boton2" class='boton' onmouseover='entraMouseAlBoton2();' onmouseout='saleMouseDelBoton2()' onclick='clickBoton()'>Botón 2</button>
+
+  <!-- la sección de scripts dijimos que si la ponemos al final del body no corremos el riesgo
+       de que falte definir elementos. Podríamos (es recomendable) ponerlo en otro archivo .js, pero
+       para este caso me pareció más fácil ver todo junto en este archivo html.-->
+  <script>
+
+
+    /*
+      Respecto a JS puro y duro, vimos:
+
+      - Que las funciones retornan/devuelven cosas, con la palabra "return". Si no se especifica eso,
+        cualquier función por defecto retorna "undefined".
+
+      - Objetos: tipos de "variable" fundamentales en JavaScript. Un objeto es una entidad que tiene
+        un conjunto de propiedades. Las propiedades pueden ser variables simples (números, textos,
+        booleanos -true/false-), pueden ser otros objetos o pueden ser funciones.
+
+      - Arrays: objetos especiales. Listas de datos ordenadas (indexadas) que pueden contener cualquier tipo
+        de elemento. Se definen usando corchetes. También se usan los corchetes para acceder a sus elementos
+        por índice. Lo repasaremos en clase.
+    */
+
+
+    // Esta es la función que invocamos en todos los eventos click de los botones
+    function clickBoton(){
+      // Cuando se clickea un botón, cambio el contenido del div con id "miDiv1"
+      document.getElementById("miDiv1").innerHTML = "Se clickeó algún botón.";
+    }
+
+    // Esta es la función que invocamos en el "mouse over"
+    function entraMouseAlBoton2() {
+      /*
+        Definimos una variable "boton2" y le asignamos el retorno de la función
+        getElementById("boton2"), que va a ser un objeto del DOM
+      */
+      var varBoton2 = document.getElementById("boton2");
+
+      // A ese objeto (al que estoy apuntando con la variable) le cambio algunas propiedades
+      varBoton2.style.backgroundColor = "darkred";
+      varBoton2.style.color = "white";
+    }
+
+    /*
+
+      Comentario por acá, sobre lo que hace la función anterior:
+    
+      -- elemento (nodo del DOM)
+            |
+            |--- atributo style
+            |         |
+            |         |---- atributo backgroundColor
+            |         |---- atributo color
+            |         |---- etc.
+            |
+            |--- etc
+
+
+      Un elemento podemos pensarlo como un objeto:
+
+      elemento = {
+        style: {
+          backgroundColor: darkgreen,
+          color: white
+        },
+        .
+        .
+        .
+        .
+        . (etc)
+      }
+    
+    */
+
+    // Función análoga a la de "entraMouseDelBoton2" pero para cuando sale
+    function saleMouseDelBoton2() {
+      var varBoton2 = document.getElementById("boton2");
+
+      varBoton2.style.backgroundColor = "grey";
+      varBoton2.style.color = "black";
+    }
+
+  </script>
+</body>
+
+
+</html>
